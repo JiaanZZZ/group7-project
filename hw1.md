@@ -9,7 +9,7 @@ You can search the most popular headlines for specific categories, countries, an
 This single-page application is a news portfolio/blog app. The purpose is to provide users with a platform to save news articles that they are interested in. They can have news/headlines layouts in a clear and appropriate order.
 
 ### What are the key features of your system?
-It will connect with a news API and display news articles related to the user’s search. The user will be able to save selected articles to read later, as well as favourite articles. We will use local storage for storing the articles on the client’s side. 
+It will connect with a news API and display news articles related to the user’s search. The user will be able to save selected articles to read later, as well as favourite articles. We will use localstorage for storing the articles on the client’s side. 
 
 ### Provide a sample architecture diagram of your system (you can use PPT with squares and circles to demonstrate a simplified flow of your system) 
 
