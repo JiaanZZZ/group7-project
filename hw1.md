@@ -16,8 +16,7 @@ It will connect with a news API and display news articles related to the user’
 
 ![Screenshot 2022-07-23 at 11 56 44](https://user-images.githubusercontent.com/74383677/180602187-1ea5cbe9-0a26-478b-95ea-afb90a214d85.png)
 
-![Screenshot 2022-07-23 at 01 15 51](https://user-images.githubusercontent.com/74383677/180582544-4ae2ea99-5558-46ab-8fca-1d61f466596f.png)
-
+![Screenshot 2022-07-23 at 11 57 12](https://user-images.githubusercontent.com/74383677/180602204-0fe8d6e3-de8a-43fd-accd-9905cb0e5a32.png)
 
 ### Describe the team approach to the project work: how are you planning to distribute the workload, how are you managing your code, and how are you planning to test your system.
 
