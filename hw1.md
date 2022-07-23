@@ -13,8 +13,8 @@ It will connect with a news API and display news articles related to the user’
 
 ### Provide a sample architecture diagram of your system (you can use PPT with squares and circles to demonstrate a simplified flow of your system) 
 
-![Screenshot 2022-07-23 at 01 15 39](https://user-images.githubusercontent.com/74383677/180582531-404b4dc6-59d3-4401-a100-fab6575acd02.png)
 
+![Screenshot 2022-07-23 at 11 56 44](https://user-images.githubusercontent.com/74383677/180602187-1ea5cbe9-0a26-478b-95ea-afb90a214d85.png)
 
 ![Screenshot 2022-07-23 at 01 15 51](https://user-images.githubusercontent.com/74383677/180582544-4ae2ea99-5558-46ab-8fca-1d61f466596f.png)
 
