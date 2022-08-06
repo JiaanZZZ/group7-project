@@ -40,11 +40,9 @@ function DropdownTopArticles() {
             display: 'flex',
             alignItems: 'center'
         }}>
-            <Typography variant="subtitle1" component="div">
-                Top
-            </Typography>
-            <FormControl sx={{ m: 1, minWidth: 150 }}>
-                <InputLabel id="select-category-input-label">category</InputLabel>
+           
+            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                <InputLabel id="select-category-input-label">News Category</InputLabel>
                 <Select
                     labelId="select-category-label"
                     id="select-category"
@@ -52,20 +50,17 @@ function DropdownTopArticles() {
                     label="Category"
                     onChange={handleChangeCategory}
                 >
-                    <MenuItem value='general'>general</MenuItem>
-                    <MenuItem value='technology'>technology</MenuItem>
-                    <MenuItem value='business' >business</MenuItem>
-                    <MenuItem value='entertainment'>entertainment</MenuItem>
-                    <MenuItem value='science' >business</MenuItem>
-                    <MenuItem value='health'>health</MenuItem>
-                    <MenuItem value='sports'>sports</MenuItem>
+                    <MenuItem value='general'>General</MenuItem>
+                    <MenuItem value='technology'>Technology</MenuItem>
+                    <MenuItem value='business' >Business</MenuItem>
+                    <MenuItem value='entertainment'>Entertainment</MenuItem>
+                    <MenuItem value='health'>Health</MenuItem>
+                    <MenuItem value='sports'>Sports</MenuItem>
                 </Select>
             </FormControl>
-            <Typography variant="subtitle1" component="div">
-                articles from
-            </Typography>
-            <FormControl sx={{ m: 1, minWidth: 150 }}>
-                <InputLabel id="select-country-input-label">category</InputLabel>
+           
+            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                <InputLabel id="select-country-input-label">News Region</InputLabel>
                 <Select
                     labelId="select-country-label"
                     id="select-country"

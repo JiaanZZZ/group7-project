@@ -18,6 +18,8 @@ const Article = ( articleData, index ) => {
     const link = articleData.url
     const imageLink = articleData.urlToImage
 
+    
+
   return (
     <Grid item key={index} xs={12} sm={6} md={4}>
 
@@ -33,7 +35,7 @@ const Article = ( articleData, index ) => {
         {title}
       </Typography>
       <Typography variant="body1" color="text.secondary">
-        {author} 
+        Author: {author}
       </Typography>
       <Typography variant="body2" color="text.primary">
         {content}
