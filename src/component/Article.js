@@ -1,4 +1,4 @@
-import './app.scss'
+import '../app.scss'
 
 import * as React from 'react';
 import Card from '@mui/material/Card';
