@@ -1,38 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { FormControl, MenuItem, Select, InputLabel, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { FormControl, MenuItem, Select, InputLabel } from '@mui/material';
 
-function DropdownTopArticles() {
+function DropdownTopArticles({ url, setUrl, changeTopArticles }) {
     const [category, setCategory] = useState('general');
-    const [country, setCountry] = useState('uk');
+    const [country, setCountry] = useState('gb');
 
-    let url = 'https://newsapi.org/v2/top-headlines?' +
-        `country=${country}&` +
-        `category=${category}&` +
-        'apiKey=644c0248558246f5929da6bafb4ba056';
-
-    // useEffect(() => {
-    //     fetch(url)
-    //         .then((response) => {
-    //             return response.json()
-    //         })
-    //         .then((result) => {
-    //             setArticles(result.articles)
-    //         })
-
-    // }, []);
 
     const handleChangeCategory = (event) => {
-        console.log('changed');
         setCategory(event.target.value);
+        let urlCopy = url
+        urlCopy.category = `category=${event.target.value}&`
+        changeTopArticles(urlCopy)
+        setUrl(urlCopy)
 
-        console.log(event)
     }
 
     const handleChangeCountry = (event) => {
-        console.log('changed');
         setCountry(event.target.value);
+        let urlCopy = url;
+        urlCopy.country = `country=${event.target.value}&`
+        changeTopArticles(urlCopy)
+        setUrl(urlCopy)
 
-        console.log(event)
     }
 
     return (
@@ -40,7 +29,7 @@ function DropdownTopArticles() {
             display: 'flex',
             alignItems: 'center'
         }}>
-           
+
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel id="select-category-input-label">News Category</InputLabel>
                 <Select
@@ -58,7 +47,7 @@ function DropdownTopArticles() {
                     <MenuItem value='sports'>Sports</MenuItem>
                 </Select>
             </FormControl>
-           
+
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel id="select-country-input-label">News Region</InputLabel>
                 <Select
@@ -68,7 +57,7 @@ function DropdownTopArticles() {
                     label="country"
                     onChange={handleChangeCountry}
                 >
-                    <MenuItem value='uk'>United Kingdom</MenuItem>
+                    <MenuItem value='gb'>Great Britain</MenuItem>
                     <MenuItem value='pl'>Poland</MenuItem>
 
                 </Select>
