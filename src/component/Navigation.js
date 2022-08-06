@@ -15,7 +15,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import HighlightIcon from "@mui/icons-material/Highlight";
 import MoreIcon from "@mui/icons-material/MoreVert";
-
+import { Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -121,7 +122,9 @@ export default function PrimarySearchAppBar() {
     >
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <FavoriteIcon />
+          <Link to="/likedNews">
+            <FavoriteIcon />
+          </Link>
         </IconButton>
         <p>Liked News</p>
       </MenuItem>
@@ -131,7 +134,9 @@ export default function PrimarySearchAppBar() {
           aria-label="show 17 new notifications"
           color="inherit"
         >
-          <BookmarksIcon />
+          <Link to="/savedNews">
+            <BookmarksIcon />
+          </Link>
         </IconButton>
         <p>Saved News</p>
       </MenuItem>
@@ -188,7 +193,9 @@ export default function PrimarySearchAppBar() {
               color="inherit"
             >
               <Badge color="error">
-                <FavoriteIcon />
+                <Link to="/likedNews">
+                  <FavoriteIcon />
+                </Link>
               </Badge>
             </IconButton>
             <IconButton
@@ -197,7 +204,9 @@ export default function PrimarySearchAppBar() {
               color="inherit"
             >
               <Badge color="error">
-                <BookmarksIcon />
+                <Link to="/savedNews">
+                  <BookmarksIcon />
+                </Link>
               </Badge>
             </IconButton>
             <IconButton
@@ -228,6 +237,7 @@ export default function PrimarySearchAppBar() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+      <Outlet/>
     </Box>
   );
 }

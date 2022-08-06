@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import Navigation from './component/Navigation';
-
-import TopArticles from './component/TopArticles'
+import React, { useState, useEffect } from "react";
+import Navigation from "./component/Navigation";
+import { Routes, Route } from "react-router-dom";
+import TopArticles from "./component/TopArticles";
 
 function App() {
-
   return (
-    <div>
-    <Navigation/>
-    <TopArticles />
-    </div>
-   
-  )
+    <Routes>
+      <Route path="/" element={<Navigation />}>
+        <Route index element={<TopArticles />} />
+        <Route path="/likedNews" element={<TopArticles />} /> 
+        
+        <Route path="/savedNews" element={<TopArticles />} />
+      </Route>
+    </Routes>
+  );
 }
 
 export default App;
