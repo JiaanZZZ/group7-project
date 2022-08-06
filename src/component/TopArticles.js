@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Container } from '@mui/material';
+import { Grid, Container, Typography } from '@mui/material';
 import Article from './Article';
+import DropdownTopArticles from './DropdownTopArticles';
 
 function TopArticles() {
   const [articles, setArticles] = useState([]);
@@ -23,13 +24,17 @@ function TopArticles() {
 
   if (articles.length > 0) {
     return (
-      <Container sx={{ py: 8 }} maxWidth="lg">
-        <Grid container spacing={4}>
-          {articles.map((article, index) => {
-            return <Article articleData={article} key={index} />;
-          })}
-        </Grid>
-      </Container>
+      <>
+        <Container sx={{ py: 8 }} maxWidth="lg">
+          <DropdownTopArticles />
+
+          <Grid container spacing={4}>
+            {articles.map((article, index) => {
+              return <Article articleData={article} key={index} />;
+            })}
+          </Grid>
+        </Container>
+      </>
     )
   } else {
     return <div className="App">No news for you</div>
