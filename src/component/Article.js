@@ -21,8 +21,12 @@ const Article = ({ articleData, index }) => {
   const author = articleData.author;
   const content = articleData.content;
   const link = articleData.url;
-  const imageLink = articleData.urlToImage;
+  let imageLink = articleData.urlToImage;
+  const defaultImageLink = 'https://images.unsplash.com/photo-1478940020726-e9e191651f1a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80'
 
+  if (imageLink === null) {
+    imageLink = defaultImageLink
+  }
 
   if (author) {
     return (
@@ -31,8 +35,8 @@ const Article = ({ articleData, index }) => {
           <CardMedia
             component="img"
             alt={title}
-            height="140"
-            image={imageLink}
+            height="200"
+            src={imageLink}
           />
           <CardContent>
             <Typography gutterBottom variant="h6" component="div">
