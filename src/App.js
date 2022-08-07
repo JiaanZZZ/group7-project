@@ -10,7 +10,7 @@ function App() {
         <Route index element={<TopArticles />} />
         <Route path="/likedNews" element={<TopArticles />} /> 
         
-        <Route path="/savedNews" element={<TopArticles />} />
+  
       </Route>
     </Routes>
   );

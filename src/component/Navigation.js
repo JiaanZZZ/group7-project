@@ -12,7 +12,6 @@ import Menu from "@mui/material/Menu";
 import ScreenSearchDesktopIcon from "@mui/icons-material/ScreenSearchDesktop";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import HighlightIcon from "@mui/icons-material/Highlight";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Link } from "react-router-dom";
@@ -128,18 +127,7 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p>Liked News</p>
       </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Link to="/savedNews">
-            <BookmarksIcon />
-          </Link>
-        </IconButton>
-        <p>Saved News</p>
-      </MenuItem>
+     
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -198,17 +186,7 @@ export default function PrimarySearchAppBar() {
                 </Link>
               </Badge>
             </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge color="error">
-                <Link to="/savedNews">
-                  <BookmarksIcon />
-                </Link>
-              </Badge>
-            </IconButton>
+          
             <IconButton
               size="large"
               edge="end"
