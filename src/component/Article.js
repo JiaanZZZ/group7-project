@@ -10,14 +10,7 @@ import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
 
 const Article = ({ articleData, index }) => {
-  const title = articleData.url
-    .split("/")
-    .filter((w) => w !== "")
-    .slice(-1)
-    .map((w) => {
-      var word = w.replaceAll("-", " ").replaceAll(".html", "");
-      return word.toUpperCase();
-    });
+  const title = articleData.title
   const author = articleData.author;
   const content = articleData.content;
   const link = articleData.url;
