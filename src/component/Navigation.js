@@ -16,6 +16,10 @@ import HighlightIcon from "@mui/icons-material/Highlight";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+
+import { useContext } from "react";
+import { SearchContext } from "../context/searchContext";
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -63,6 +67,8 @@ export default function PrimarySearchAppBar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const {setSearchTerm}=useContext(SearchContext);
+
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -79,6 +85,11 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  const handleSearch=(e)=>{
+    setSearchTerm(e.target.value);
+    // console.log(e.target.value);
+    // console.log(searchTerm);
+  }
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -169,8 +180,9 @@ export default function PrimarySearchAppBar() {
               <ScreenSearchDesktopIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="Search News…"
               inputProps={{ "aria-label": "search" }}
+              onChange={handleSearch}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
