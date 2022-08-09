@@ -10,15 +10,17 @@ import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import ScreenSearchDesktopIcon from "@mui/icons-material/ScreenSearchDesktop";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import HighlightIcon from "@mui/icons-material/Highlight";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+import Avatar from "@mui/material/Avatar";
 
 import { useContext } from "react";
 import { SearchContext } from "../context/searchContext";
+import { UserAuth } from "../context/authContext";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -61,13 +63,27 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
+  const { user, logOut } = UserAuth();
+  
+  const navigate = useNavigate();
+  const handleSignOut = async () => {
+    try {
+      await logOut();
+      console.log("Logged out");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // const {displayName,photoURL} = user;
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const {setSearchTerm}=useContext(SearchContext);
+  const { setSearchTerm } = useContext(SearchContext);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -85,11 +101,11 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  const handleSearch=(e)=>{
+  const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     // console.log(e.target.value);
     // console.log(searchTerm);
-  }
+  };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -108,8 +124,15 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {user ? (
+        <MenuItem onClick={handleMenuClose}>{user.displayName}</MenuItem>
+      ) : (
+       ""
+      )}
+      {user ? (
+        <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
+      ) : (""
+      )}
     </Menu>
   );
 
@@ -131,14 +154,16 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Link to="/likedNews">
-            <FavoriteIcon />
-          </Link>
+        <IconButton
+          size="large"
+          aria-label="show 4 new mails"
+          color="inherit"
+          onClick={handleSignOut}
+        >
+          SignOut
         </IconButton>
-        <p>Liked News</p>
       </MenuItem>
-     
+      {user ? (
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -147,10 +172,22 @@ export default function PrimarySearchAppBar() {
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          
+            <Avatar alt="Remy Sharp" src={user.photoURL} />
         </IconButton>
-        <p>Profile</p>
-      </MenuItem>
+      </MenuItem>):( <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          
+            <Avatar alt="Remy Sharp" />
+        </IconButton>
+      </MenuItem>)
+      }
     </Menu>
   );
 
@@ -175,42 +212,48 @@ export default function PrimarySearchAppBar() {
           >
             News Feed
           </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <ScreenSearchDesktopIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search News…"
-              inputProps={{ "aria-label": "search" }}
-              onChange={handleSearch}
-            />
-          </Search>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-            >
-              <Badge color="error">
-                <Link to="/likedNews">
-                  <FavoriteIcon />
-                </Link>
-              </Badge>
-            </IconButton>
-          
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </Box>
+          {user ? (
+            <React.Fragment>
+              <Search>
+                <SearchIconWrapper>
+                  <ScreenSearchDesktopIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search News…"
+                  inputProps={{ "aria-label": "search" }}
+                  onChange={handleSearch}
+                />
+              </Search>
+              <Box sx={{ flexGrow: 1 }} />
+              <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                <IconButton
+                  size="large"
+                  aria-label="show 4 new mails"
+                  color="inherit"
+                >
+                  <Badge color="error">
+                    <Link to="/likedNews">
+                      <FavoriteIcon />
+                    </Link>
+                  </Badge>
+                </IconButton>
+
+                <IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <Avatar alt="Remy Sharp" src={user.photoURL} />
+                </IconButton>
+              </Box>
+            </React.Fragment>
+          ) : (
+            ""
+          )}
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -227,7 +270,7 @@ export default function PrimarySearchAppBar() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-      <Outlet/>
+      <Outlet />
     </Box>
   );
 }
