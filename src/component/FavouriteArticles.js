@@ -5,27 +5,13 @@ import DropdownTopArticles from "./DropdownTopArticles";
 
 import { SearchContext } from "../context/searchContext";
 
-function TopArticles() {
-  const [articles, setArticles] = useState([]);
-  const [url, setUrl] = useState({
-    query: "https://newsapi.org/v2/top-headlines?",
-    country: "country=gb&",
-    category: "category=general&",
-    key: "apiKey=644c0248558246f5929da6bafb4ba056",
-  });
+const FavouriteArticles = () => {
 
-  const changeTopArticles = () => {
-    fetch(Object.values(url).join().replaceAll(",", ""))
-      .then((response) => {
-        return response.json();
-      })
-      .then((result) => {
-        setArticles(result.articles);
-      });
-  };
-  useEffect(() => {
-    changeTopArticles(url);
-  }, []);
+
+  if (JSON.parse(localStorage.getItem("favourites")) === null) {
+    localStorage.setItem("favourites", JSON.stringify([]));
+  }
+  const articles = JSON.parse(localStorage.getItem("favourites"));
 
   const { searchTerm } = useContext(SearchContext);
   const newFilter = articles.filter((article) => {
@@ -40,11 +26,6 @@ function TopArticles() {
     return (
       <>
         <Container sx={{ py: 8 }} maxWidth="lg">
-          <DropdownTopArticles
-            url={url}
-            setUrl={setUrl}
-            changeTopArticles={changeTopArticles}
-          />
 
           <Grid container spacing={4}>
             {newFilter
@@ -61,4 +42,4 @@ function TopArticles() {
   }
 }
 
-export default TopArticles;
+export default FavouriteArticles;
