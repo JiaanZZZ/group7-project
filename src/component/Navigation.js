@@ -64,6 +64,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function PrimarySearchAppBar() {
   const { user, logOut } = UserAuth();
+  
   const navigate = useNavigate();
   const handleSignOut = async () => {
     try {
@@ -162,7 +163,7 @@ export default function PrimarySearchAppBar() {
           SignOut
         </IconButton>
       </MenuItem>
-
+      {user ? (
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -171,13 +172,22 @@ export default function PrimarySearchAppBar() {
           aria-haspopup="true"
           color="inherit"
         >
-          {user ? (
+          
             <Avatar alt="Remy Sharp" src={user.photoURL} />
-          ) : (
-            <Avatar alt="Remy Sharp" />
-          )}
         </IconButton>
-      </MenuItem>
+      </MenuItem>):( <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          
+            <Avatar alt="Remy Sharp" />
+        </IconButton>
+      </MenuItem>)
+      }
     </Menu>
   );
 

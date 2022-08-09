@@ -13,7 +13,7 @@ function App() {
         <Route path="/" element={<Navigation />}>
           <Route index element={<Signin />} />
           <Route path="/topArticles" element={<TopArticles />} />
-          <Route path="/likedArticles" element={<TopArticles />} />
+          <Route path="/likedNews" element={<TopArticles />} />
         </Route>
       </Routes>
     </AuthContextProvider>
