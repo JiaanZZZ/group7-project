@@ -174,7 +174,9 @@ export default function PrimarySearchAppBar() {
         >
           
             <Avatar alt="Remy Sharp" src={user.photoURL} />
+            
         </IconButton>
+        { user.displayName}
       </MenuItem>):( <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
