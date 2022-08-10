@@ -28,49 +28,37 @@ function TopArticles() {
     changeTopArticles(url);
   }, []);
 
+  const { searchTerm } = useContext(SearchContext);
+  const [searchUrl, setSearchUrl] = useState({
+    query: "https://newsapi.org/v2/everything?",
+    q: "q=summer&",
+    pageSize: "pageSize=10&",
+    key: "apiKey=644c0248558246f5929da6bafb4ba056",
+  });
 
+  const changeSearchArticles = () => {
 
-   const { searchTerm } = useContext(SearchContext);
-//   const [searchUrl, setSearchUrl] = useState({
-//     query: "https://newsapi.org/v2/everything?",
-//     q: "q=summer&",
-//     pageSize: "pageSize=10&",
-//     key: "apiKey=644c0248558246f5929da6bafb4ba056",
-//   });
+    fetch(Object.values(searchUrl).join().replaceAll(",", ""))
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        setSearchArticles(result.articles);
+      });
+  };
 
-//   const changeSearchArticles = () => {
-//     // console.log(Object.values(searchUrl).join().replaceAll(",", ""))
-//     fetch(Object.values(searchUrl).join().replaceAll(",", ""))
-//       .then((response) => {
-//         return response.json();
-//       })
-//       .then((result) => {
-//         setSearchArticles(result.articles);
-//         console.log(searchArticles.length)
-//       });
-//   };
+  useEffect(() => {
+    if (searchTerm !== "") {
+      let searchUrlCopy = searchUrl;
+      searchUrlCopy.q = `q=${searchTerm}&`;
+      //console.log(searchUrlCopy)
+      changeSearchArticles(searchUrlCopy);
+      setSearchUrl(searchUrlCopy);
+      // console.log(searchUrl)
+    }
+  }, [searchTerm]);
 
-//   useEffect(() => {
-//     if(searchTerm!==""){
-//       setSearchUrl(searchTerm);
-//       let searchUrlCopy = searchUrl;
-//       searchUrlCopy.q = `q=${searchTerm}&`;
-//       changeSearchArticles(searchUrlCopy);
-//       setSearchUrl(searchUrlCopy);
-//     }
-   
-  
-// }, [searchTerm]);
-  
-
-  
-  // useEffect(() => {
-  //   changeSearchArticles(searchUrl);
-  // }, [searchUrl]);
- 
-  
-
-  if (articles.length > 0 && searchTerm === "") {
+  if (articles.length > 0 && searchTerm.length === 0) {
     return (
       <Fragment>
         <Container sx={{ py: 8 }} maxWidth="lg">
@@ -88,7 +76,7 @@ function TopArticles() {
         </Container>
       </Fragment>
     );
-  } else if (searchTerm !== "" && searchArticles.length > 0) {
+  } else if (searchTerm.length > 0 && searchArticles.length > 0) {
     <Fragment>
       <Container sx={{ py: 8 }} maxWidth="lg">
         <Grid container spacing={4}>
@@ -99,7 +87,20 @@ function TopArticles() {
       </Container>
     </Fragment>;
   } else {
-    return <div className="App">No news for you</div>;
+    return (
+      <div className="App">
+        <h1
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100vh",
+          }}
+        >
+          No news for you
+        </h1>
+      </div>
+    );
   }
 }
 
