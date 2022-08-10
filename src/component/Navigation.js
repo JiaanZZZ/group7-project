@@ -83,7 +83,7 @@ export default function PrimarySearchAppBar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const { setSearchTerm } = useContext(SearchContext);
+  const { setSearchTerm,searchTerm } = useContext(SearchContext);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -102,9 +102,10 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
   const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-    // console.log(e.target.value);
-    // console.log(searchTerm);
+    e.preventDefault();
+     setSearchTerm(e.target[0].value);
+    //   console.log(e.target[0].value);
+    //  console.log(searchTerm);
   };
 
   const menuId = "primary-search-account-menu";
@@ -216,16 +217,18 @@ export default function PrimarySearchAppBar() {
           </Typography>
           {user ? (
             <React.Fragment>
-              <Search>
-                <SearchIconWrapper>
-                  <ScreenSearchDesktopIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                  placeholder="Search News…"
-                  inputProps={{ "aria-label": "search" }}
-                  onChange={handleSearch}
-                />
-              </Search>
+            <form onSubmit={handleSearch}>
+            <Search>
+            <SearchIconWrapper>
+              <ScreenSearchDesktopIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search News…"
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Search>
+            </form>
+             
               <Box sx={{ flexGrow: 1 }} />
               <Box sx={{ display: { xs: "none", md: "flex" } }}>
                 <IconButton

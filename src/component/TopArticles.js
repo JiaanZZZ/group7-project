@@ -37,6 +37,7 @@ function TopArticles() {
   });
 
   const changeSearchArticles = () => {
+    //console.log(Object.values(searchUrl).join().replaceAll(",", ""))
 
     fetch(Object.values(searchUrl).join().replaceAll(",", ""))
       .then((response) => {
@@ -48,7 +49,7 @@ function TopArticles() {
   };
 
   useEffect(() => {
-    if (searchTerm !== "") {
+    if (searchTerm.length>0) {
       let searchUrlCopy = searchUrl;
       searchUrlCopy.q = `q=${searchTerm}&`;
       //console.log(searchUrlCopy)
