@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import Navigation from "./component/Navigation";
 import { Routes, Route } from "react-router-dom";
 import TopArticles from "./component/TopArticles";

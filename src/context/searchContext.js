@@ -2,8 +2,16 @@ import { createContext } from "react";
 import { useState } from "react";
 
 export const SearchContext = createContext({
+<<<<<<< Updated upstream
     searchTerm:"",
     setSearchTerm:()=>{}
+=======
+    searchTerm:"climate",
+    setSearchTerm:()=>{},
+    searchArticles:[],
+    setSearchArticles:()=>{}
+
+>>>>>>> Stashed changes
 
 });
 

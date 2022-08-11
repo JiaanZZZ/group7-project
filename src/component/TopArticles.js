@@ -1,9 +1,16 @@
+<<<<<<< Updated upstream
 import React, { useState, useEffect, useContext } from "react";
 import { Grid, Container } from "@mui/material";
 import Article from "./Article";
 import DropdownTopArticles from "./DropdownTopArticles";
 
 import { SearchContext } from "../context/searchContext";
+=======
+import React, { useState, useEffect, Fragment } from "react";
+import { Grid, Container } from "@mui/material";
+import Article from "./Article";
+import DropdownTopArticles from "./DropdownTopArticles";
+>>>>>>> Stashed changes
 
 function TopArticles() {
   const [articles, setArticles] = useState([]);

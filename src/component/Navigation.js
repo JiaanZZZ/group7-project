@@ -101,6 +101,31 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+<<<<<<< Updated upstream
+=======
+
+  const [searchUrl, setSearchUrl] = useState({
+    query: "https://newsapi.org/v2/everything?",
+    q: "q=climate&",
+    pageSize: "pageSize=15&",
+    key: "apiKey=644c0248558246f5929da6bafb4ba056",
+  });
+
+  const changeSearchArticles = () => {
+    //console.log(Object.values(searchUrl).join().replaceAll(",", ""))
+
+    fetch(Object.values(searchUrl).join().replaceAll(",", ""))
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        console.log(searchArticles);
+        setSearchArticles(result.articles);
+        console.log(searchArticles);
+      });
+  };
+
+>>>>>>> Stashed changes
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     // console.log(e.target.value);
