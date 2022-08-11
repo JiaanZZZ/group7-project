@@ -26,12 +26,14 @@ const Article = ({ articleData, index }) => {
 
   if (author) {
     return (
+      
       <Grid item key={index} xs={12} sm={6} md={4}>
         <Card sx={{ maxWidth: 345 }}>
           <CardMedia component="img" alt={title} height="200" src={imageLink} />
           <CardContent>
             <Typography gutterBottom variant="h6" component="div">
               {title}
+              
             </Typography>
             <Typography variant="body1" color="text.secondary">
               {author}
