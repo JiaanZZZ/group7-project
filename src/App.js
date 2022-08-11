@@ -1,9 +1,9 @@
 import Navigation from "./component/Navigation";
 import { Routes, Route } from "react-router-dom";
 import TopArticles from "./component/TopArticles";
-import Auth from "./component/Signin";
 import { AuthContextProvider } from "./context/authContext";
 import Signin from "./component/Signin";
+import SearchArticles from './component/SearchArticles'
 
 function App() {
   return (
@@ -12,6 +12,7 @@ function App() {
         <Route path="/" element={<Navigation />}>
           <Route index element={<Signin />} />
           <Route path="/topArticles" element={<TopArticles />} />
+          <Route path="/searchArticles" element={<SearchArticles />} />
           <Route path="/likedNews" element={<TopArticles />} />
         </Route>
       </Routes>

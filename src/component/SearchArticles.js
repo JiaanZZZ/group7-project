@@ -1,10 +1,10 @@
-import React, {  useContext, Fragment } from "react";
+import React, { useState, useContext, Fragment } from "react";
 import { Grid, Container } from "@mui/material";
 import Article from "./Article";
 import { SearchContext } from "../context/searchContext";
 
 function TopArticles() {
-  const {  searchArticles } = useContext(SearchContext);
+  const { searchTerm, searchArticles } = useContext(SearchContext);
 
   if (searchArticles.length > 0) {
     return (
