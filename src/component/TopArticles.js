@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, Fragment } from "react";
 import { Grid, Container } from "@mui/material";
 import Article from "./Article";
 import DropdownTopArticles from "./DropdownTopArticles";
-
 import { SearchContext } from "../context/searchContext";
 
 function TopArticles() {
   const [articles, setArticles] = useState([]);
+
   const [url, setUrl] = useState({
     query: "https://newsapi.org/v2/top-headlines?",
     country: "country=gb&",
@@ -27,18 +27,10 @@ function TopArticles() {
     changeTopArticles(url);
   }, []);
 
-  const { searchTerm } = useContext(SearchContext);
-  const newFilter = articles.filter((article) => {
-    if (searchTerm === "") {
-      return article;
-    } else if (article.title.toLowerCase().includes(searchTerm.toLowerCase())) {
-      return article;
-    }
-  });
-
-  if (articles.length > 0) {
+  if (articles.length > 0 ) {
+ 
     return (
-      <>
+      <Fragment>
         <Container sx={{ py: 8 }} maxWidth="lg">
           <DropdownTopArticles
             url={url}
@@ -47,16 +39,28 @@ function TopArticles() {
           />
 
           <Grid container spacing={4}>
-            {newFilter
-              .map((article, index) => {
-                return <Article articleData={article} key={index} />;
-              })}
+            {articles.map((article, index) => {
+              return <Article articleData={article} key={index} />;
+            })}
           </Grid>
         </Container>
-      </>
+      </Fragment>
     );
   } else {
-    return <div className="App">No news for you</div>;
+    return (
+      <div className="App">
+        <h1
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100vh",
+          }}
+        >
+          No news for you
+        </h1>
+      </div>
+    );
   }
 }
 

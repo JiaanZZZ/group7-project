@@ -17,10 +17,11 @@ import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 
-import { useContext } from "react";
+import { useContext, useState,useEffect } from "react";
 import { SearchContext } from "../context/searchContext";
 import { UserAuth } from "../context/authContext";
 import { useNavigate } from "react-router-dom";
+import { async } from "@firebase/util";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -64,7 +65,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function PrimarySearchAppBar() {
   const { user, logOut } = UserAuth();
-  
+
   const navigate = useNavigate();
   const handleSignOut = async () => {
     try {
@@ -83,7 +84,8 @@ export default function PrimarySearchAppBar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const { setSearchTerm } = useContext(SearchContext);
+  const { setSearchTerm, searchTerm, searchArticles, setSearchArticles } =
+    useContext(SearchContext);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -101,11 +103,40 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-    // console.log(e.target.value);
-    // console.log(searchTerm);
+
+  const [searchUrl, setSearchUrl] = useState({
+    query: "https://newsapi.org/v2/everything?",
+    q: "q=summer&",
+    pageSize: "pageSize=10&",
+    key: "apiKey=644c0248558246f5929da6bafb4ba056",
+  });
+
+  const changeSearchArticles = () => {
+    //console.log(Object.values(searchUrl).join().replaceAll(",", ""))
+
+    fetch(Object.values(searchUrl).join().replaceAll(",", ""))
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        console.log(searchArticles);
+        setSearchArticles(result.articles);
+        console.log(searchArticles);
+      });
   };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchTerm(e.target[0].value);
+    navigate('/searchArticles')
+  };
+
+  useEffect(()=>{
+    let searchUrlCopy = searchUrl;
+    searchUrlCopy.q = `q=${searchTerm}&`;
+    changeSearchArticles(searchUrlCopy);
+    setSearchUrl(searchUrlCopy);
+  },[searchTerm])
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -127,12 +158,9 @@ export default function PrimarySearchAppBar() {
       {user ? (
         <MenuItem onClick={handleMenuClose}>{user.displayName}</MenuItem>
       ) : (
-       ""
+        ""
       )}
-      {user ? (
-        <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
-      ) : (""
-      )}
+      {user ? <MenuItem onClick={handleSignOut}>Sign Out</MenuItem> : ""}
     </Menu>
   );
 
@@ -164,30 +192,31 @@ export default function PrimarySearchAppBar() {
         </IconButton>
       </MenuItem>
       {user ? (
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          
+        <MenuItem onClick={handleProfileMenuOpen}>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
             <Avatar alt="Remy Sharp" src={user.photoURL} />
-        </IconButton>
-      </MenuItem>):( <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          
+          </IconButton>
+          {user.displayName}
+        </MenuItem>
+      ) : (
+        <MenuItem onClick={handleProfileMenuOpen}>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
             <Avatar alt="Remy Sharp" />
-        </IconButton>
-      </MenuItem>)
-      }
+          </IconButton>
+        </MenuItem>
+      )}
     </Menu>
   );
 
@@ -204,26 +233,40 @@ export default function PrimarySearchAppBar() {
           >
             <HighlightIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 2 }}
+            onClick={() => {
+              navigate("/");
+            }}
           >
-            News Feed
-          </Typography>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ display: { xs: "none", sm: "block" } }}
+            >
+              News Feed
+            </Typography>
+          </IconButton>
+
           {user ? (
             <React.Fragment>
-              <Search>
-                <SearchIconWrapper>
-                  <ScreenSearchDesktopIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                  placeholder="Search News…"
-                  inputProps={{ "aria-label": "search" }}
-                  onChange={handleSearch}
-                />
-              </Search>
+              <form onSubmit={handleSearch}>
+                <Search>
+                  <SearchIconWrapper>
+                    <ScreenSearchDesktopIcon />
+                  </SearchIconWrapper>
+                  <StyledInputBase
+                    placeholder="Search News…"
+                    inputProps={{ "aria-label": "search" }}
+                  />
+                </Search>
+              </form>
+
               <Box sx={{ flexGrow: 1 }} />
               <Box sx={{ display: { xs: "none", md: "flex" } }}>
                 <IconButton
