@@ -14,13 +14,13 @@ import IconButton from "@mui/material/IconButton";
 const Article = ({ articleData, index }) => {
   const title = articleData.title;
   const author = articleData.author;
-  const content = articleData.content;
+  const description = articleData.description;
   const link = articleData.url;
   let imageLink = articleData.urlToImage;
   const defaultImageLink =
     "https://images.unsplash.com/photo-1478940020726-e9e191651f1a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80";
 
-  if (imageLink === null) {
+    if (imageLink === null) {
     imageLink = defaultImageLink;
   }
 
@@ -29,21 +29,21 @@ const Article = ({ articleData, index }) => {
       
       <Grid item key={index} xs={12} sm={6} md={4}>
         <Card sx={{ maxWidth: 345 }}>
-          <CardMedia component="img" alt={title} height="200" src={imageLink} />
+          <CardMedia component="img" alt={title} height="200" src={imageLink} className='articleImage'/>
           <CardContent>
-            <Typography gutterBottom variant="h6" component="div">
+            <Typography gutterBottom variant="h6" component="div" className='title'>
               {title}
               
             </Typography>
-            <Typography variant="body1" color="text.secondary">
+            <Typography variant="body1" color="text.secondary" className='author'>
               {author}
             </Typography>
-            <Typography variant="body2" color="text.primary">
-              {content}
+            <Typography variant="body2" color="text.primary" className='description'>
+              {description}
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" href={link} target="_blank" rel="noreferrer">
+            <Button size="small" href={link} target="_blank" rel="noreferrer" className='url'>
               Read More
             </Button>
             <IconButton aria-label="add to favorites">
@@ -56,18 +56,18 @@ const Article = ({ articleData, index }) => {
   } else {
     <Grid item key={index} xs={12} sm={6} md={4}>
       <Card sx={{ maxWidth: 345 }}>
-        <CardMedia component="img" alt={title} height="140" image={imageLink} />
+        <CardMedia component="img" alt={title} height="140" image={imageLink} className='articleImage'/>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h5" component="div" className='title'>
             {title}
           </Typography>
 
-          <Typography variant="body2" color="text.primary">
-            {content}
+          <Typography variant="body2" color="text.primary" className='description'>
+            {description}
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" href={link} target="_blank" rel="noreferrer">
+          <Button size="small" href={link} target="_blank" rel="noreferrer" className='url'>
             Read More
           </Button>
 
