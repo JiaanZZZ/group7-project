@@ -220,7 +220,7 @@ export default function PrimarySearchAppBar() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
             onClick={() => {
-              navigate("/topArticles");
+              user? navigate("/topArticles") : navigate("/")
             }}
           >
             <HighlightIcon />
