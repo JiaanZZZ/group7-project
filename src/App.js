@@ -4,6 +4,7 @@ import TopArticles from "./component/TopArticles";
 import { AuthContextProvider } from "./context/authContext";
 import Signin from "./component/Signin";
 import SearchArticles from './component/SearchArticles'
+import LikedArticles from './component/LikedArticles'
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
           <Route index element={<Signin />} />
           <Route path="/topArticles" element={<TopArticles />} />
           <Route path="/searchArticles" element={<SearchArticles />} />
-          <Route path="/likedNews" element={<TopArticles />} />
+          <Route path="/likedNews" element={<LikedArticles />} />
         </Route>
       </Routes>
     </AuthContextProvider>
