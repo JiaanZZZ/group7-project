@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Fragment } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -17,7 +18,7 @@ import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 
-import { useContext, useState,useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { SearchContext } from "../context/searchContext";
 import { UserAuth } from "../context/authContext";
 import { useNavigate } from "react-router-dom";
@@ -128,15 +129,15 @@ export default function PrimarySearchAppBar() {
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchTerm(e.target[0].value);
-    navigate('/searchArticles')
+    navigate("/searchArticles");
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     let searchUrlCopy = searchUrl;
     searchUrlCopy.q = `q=${searchTerm}&`;
     changeSearchArticles(searchUrlCopy);
     setSearchUrl(searchUrlCopy);
-  },[searchTerm])
+  }, [searchTerm]);
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -166,58 +167,48 @@ export default function PrimarySearchAppBar() {
 
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 4 new mails"
-          color="inherit"
-          onClick={handleSignOut}
-        >
-          SignOut
-        </IconButton>
-      </MenuItem>
-      {user ? (
-        <MenuItem onClick={handleProfileMenuOpen}>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="primary-search-account-menu"
-            aria-haspopup="true"
-            color="inherit"
+  
+          <Menu
+            anchorEl={mobileMoreAnchorEl}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            id={mobileMenuId}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={isMobileMenuOpen}
+            onClose={handleMobileMenuClose}
           >
-            <Avatar alt="Remy Sharp" src={user.photoURL} />
-          </IconButton>
-          {user.displayName}
-        </MenuItem>
-      ) : (
-        <MenuItem onClick={handleProfileMenuOpen}>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="primary-search-account-menu"
-            aria-haspopup="true"
-            color="inherit"
-          >
-            <Avatar alt="Remy Sharp" />
-          </IconButton>
-        </MenuItem>
-      )}
-    </Menu>
+          {user ? ( <MenuItem onClick={handleProfileMenuOpen}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="primary-search-account-menu"
+                aria-haspopup="true"
+                color="inherit"
+              >
+                <Avatar alt="Remy Sharp" src={user.photoURL} />
+              </IconButton>
+              {user.displayName}
+            </MenuItem>):""}
+            {user ? (
+            <MenuItem>
+              <IconButton
+                size="large"
+                aria-label="show 4 new mails"
+                color="inherit"
+                onClick={handleSignOut}
+              >
+                Sign Out
+              </IconButton>
+            </MenuItem>):"BYE"}
+          </Menu>
+     
+      
   );
 
   return (
@@ -306,7 +297,7 @@ export default function PrimarySearchAppBar() {
               onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              <MoreIcon />
+              {user ? <MoreIcon /> : ""}
             </IconButton>
           </Box>
         </Toolbar>
