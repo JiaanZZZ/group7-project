@@ -1,9 +1,7 @@
-import { getDatabase, ref, child, get } from "firebase/database";
-
 import React, { useState, useEffect } from "react";
 import { Grid, Container } from "@mui/material";
 import Article from "./Article";
-
+import { getDatabase, ref, child, get } from "firebase/database";
 import { UserAuth } from "../context/authContext";
 
 const LikedArticles = () => {

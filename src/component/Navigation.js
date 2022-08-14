@@ -113,16 +113,13 @@ export default function PrimarySearchAppBar() {
   });
 
   const changeSearchArticles = () => {
-    //console.log(Object.values(searchUrl).join().replaceAll(",", ""))
 
     fetch(Object.values(searchUrl).join().replaceAll(",", ""))
       .then((response) => {
         return response.json();
       })
       .then((result) => {
-        console.log(searchArticles);
         setSearchArticles(result.articles);
-        console.log(searchArticles);
       });
   };
 
@@ -215,15 +212,7 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <HighlightIcon />
-          </IconButton>
+
           <IconButton
             size="large"
             edge="start"
@@ -231,16 +220,18 @@ export default function PrimarySearchAppBar() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
             onClick={() => {
-              navigate("/");
+              navigate("/topArticles");
             }}
           >
+            <HighlightIcon />
+
             <Typography
               variant="h6"
               noWrap
               component="div"
-              sx={{ display: { xs: "none", sm: "block" } }}
+              sx={{ display: { xs: "none", sm: "block" }, paddingLeft: "10px" }}
             >
-              News Feed
+            News Feed
             </Typography>
           </IconButton>
 

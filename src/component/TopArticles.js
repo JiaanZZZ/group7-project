@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext, Fragment } from "react";
 import { Grid, Container } from "@mui/material";
 import Article from "./Article";
 import DropdownTopArticles from "./DropdownTopArticles";
-import { SearchContext } from "../context/searchContext";
 
 function TopArticles() {
   const [articles, setArticles] = useState([]);

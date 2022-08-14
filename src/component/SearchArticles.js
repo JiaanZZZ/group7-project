@@ -29,7 +29,7 @@ function TopArticles() {
             height: "100vh",
           }}
         >
-          No news for you
+          No articles found.
         </h1>
       </div>
     );
