@@ -5,6 +5,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/authContext";
 
+
 const theme = createTheme({
   typography: {
     fontFamily: "Inconsolata",

@@ -57,7 +57,7 @@ function TopArticles() {
             height: "100vh",
           }}
         >
-          No news for you
+          Loading articles...
         </h1>
       </div>
     );

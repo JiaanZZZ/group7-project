@@ -8,14 +8,17 @@ import {
 } from "firebase/auth";
 import { authFirebase } from "../component/Firebase";
 
+
+
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
-  //console.log(user)
+
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(authFirebase, provider);
+
   };
 
   const logOut = ()=>{
@@ -37,6 +40,8 @@ export const AuthContextProvider = ({ children }) => {
   );
 };
 
+
 export const UserAuth = () => {
   return useContext(AuthContext);
 };
+
