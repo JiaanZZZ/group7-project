@@ -205,7 +205,7 @@ export default function PrimarySearchAppBar() {
               >
                 Sign Out
               </IconButton>
-            </MenuItem>):"BYE"}
+            </MenuItem>):""}
           </Menu>
      
       
