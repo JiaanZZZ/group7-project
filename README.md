@@ -8,6 +8,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 If you're based in the UK, please use VPN!
 
+* [Project presentation](https://github.com/JiaanZZZ/group7-project/blob/main/News%20Feed%20Presentation.pdf)
+* [Project report](https://github.com/JiaanZZZ/group7-project/blob/main/News%20Feed%20Report.pdf)
+
 App Demo:
 ![Screenshot 2022-08-14 at 15 47 54](https://user-images.githubusercontent.com/74383677/184542328-da923556-f3bd-4dc5-bee6-d3d82efdacd8.png)
 ![Screenshot 2022-08-14 at 15 48 30](https://user-images.githubusercontent.com/74383677/184542358-1e7fc614-b386-4601-b2b8-6cd012410efb.png)
